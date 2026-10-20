@@ -3,401 +3,318 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>伝説のポケモンと出会う レジェンドリサーチ</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Orbitron & Zen Kaku Gothic New -->
+    <title>伝説のポケモンと出会う レジェンドリサーチ in 日本橋＆八重洲</title>
+    <!-- 公式サイトのスタイル・フォント構成をそのまま再現 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Canvas Confetti -->
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        orbitron: ['Orbitron', 'sans-serif'],
-                        sans: ['Zen Kaku Gothic New', 'sans-serif'],
-                    },
-                    colors: {
-                        cyber: {
-                            dark: '#0a0d14',
-                            panel: '#121824',
-                            border: '#1f2a3e',
-                            accent: '#00e5ff',
-                            gold: '#fbbf24',
-                            danger: '#ef4444',
-                            success: '#10b981'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
     <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background: radial-gradient(circle at 50% 15%, #182232 0%, #0a0d14 70%, #05070a 100%);
-            background-attachment: fixed;
-            color: #f1f5f9;
+            background-color: #0d121c;
+            color: #ffffff;
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 60px;
         }
-
-        /* Glowing Effects */
-        .glow-accent {
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.35);
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px 16px;
         }
-        .glow-gold {
-            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+        section {
+            background: #151d2e;
+            border: 1px solid #23314f;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
         }
-        .text-glow {
-            text-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+        .intro-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #c7d2fe;
         }
-        .text-glow-gold {
-            text-shadow: 0 0 10px rgba(251, 191, 36, 0.7);
+        h2.title-sub {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fbbf24;
+            text-align: center;
+            margin-bottom: 8px;
         }
-
-        /* Radar Scanner Effect */
-        .scan-line {
-            background: linear-gradient(to bottom, transparent, rgba(0, 229, 255, 0.8), transparent);
-            animation: scan 2s linear infinite;
+        p.desc {
+            font-size: 12px;
+            color: #94a3b8;
+            text-align: center;
+            line-height: 1.6;
         }
-        @keyframes scan {
-            0% { top: -100%; }
-            100% { top: 100%; }
+        .progress-box {
+            background: #111827;
+            border: 1px solid #1f293d;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 16px;
         }
-
-        /* Screen Shake for Incorrect Password */
-        .shake {
-            animation: shakeAnim 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        .progress-rate {
+            font-size: 28px;
+            font-weight: 900;
+            color: #fbbf24;
         }
-        @keyframes shakeAnim {
-            10%, 90% { transform: translate3d(-2px, 0, 0); }
-            20%, 80% { transform: translate3d(4px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
-            40%, 60% { transform: translate3d(6px, 0, 0); }
+        .progress-bar-bg {
+            background: #0d121c;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 10px 0;
+            border: 1px solid #23314f;
         }
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #f59e0b, #fbbf24);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        .q-card {
+            background: #151d2e;
+            border: 1px solid #23314f;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .q-title {
+            font-size: 16px;
+            font-weight: 900;
+            color: #38bdf8;
+        }
+        .status-badge {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: #1e293b;
+            color: #94a3b8;
+        }
+        .status-badge.solved {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.4);
+        }
+        input[type="text"] {
+            width: 100%;
+            background: #0d121c;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 10px 12px;
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #38bdf8;
+        }
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #0ea5e9, #2563eb);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .btn-submit:active { opacity: 0.8; }
+        .msg-status {
+            font-size: 12px;
+            text-align: center;
+            font-weight: 700;
+            margin-top: 6px;
+        }
+        .solved-content {
+            background: #0d121c;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 12px;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+        .reset-wrap {
+            text-align: right;
+            margin-bottom: 12px;
+        }
+        .btn-reset {
+            background: transparent;
+            border: 1px solid #334155;
+            color: #94a3b8;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        footer {
+            text-align: center;
+            font-size: 10px;
+            color: #64748b;
+            margin-top: 30px;
+            line-height: 1.5;
+        }
+        ruby rt { font-size: 0.6em; color: #94a3b8; }
     </style>
 </head>
-<body class="min-h-screen pb-16 font-sans text-slate-100 antialiased selection:bg-cyan-500 selection:text-black">
+<body>
 
-    <!-- Header Section -->
-    <header class="relative border-b border-cyan-500/30 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
-        <div class="max-w-xl mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-full bg-cyan-500/10 border border-cyan-400/50 flex items-center justify-center glow-accent">
-                    <i class="fa-solid fa-[#00e5ff] fa-microchip text-cyan-400"></i>
-                </div>
-                <div>
-                    <h1 class="text-xs font-bold text-cyan-400 tracking-wider">LEGEND RESEARCH</h1>
-                    <p class="text-base font-black text-white tracking-tight">レジェンドリサーチ</p>
-                </div>
-            </div>
-            <button onclick="confirmReset()" class="text-xs px-3 py-1.5 rounded-md border border-slate-700 bg-slate-800/80 text-slate-400 hover:text-rose-400 hover:border-rose-500/50 transition-all flex items-center gap-1.5">
-                <i class="fa-solid fa-rotate-right"></i> リセット
-            </button>
-        </div>
-    </header>
-
-    <main class="max-w-xl mx-auto px-4 pt-6 space-y-6">
-
-        <!-- Narrative Intro Box -->
-        <section class="bg-slate-900/90 border border-cyan-500/30 rounded-2xl p-5 shadow-2xl relative overflow-hidden">
-            <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none"></div>
-            <p class="text-sm leading-relaxed text-slate-300 font-medium">
+    <div class="container">
+        
+        <!-- 導入ストーリー -->
+        <section>
+            <p class="intro-text">
                 私は冒険家ランタン。<br>
                 伝説のポケモンに出会うために人生の全てを捧げてきた、しがない冒険家だ。<br>
                 私が一生をかけて紡いだ記録を、このリサーチレポートに残す。<br><br>
                 ポケモンを愛する正しい心をもつ者だけが解読できるよう、すべてのデータは厳重に暗号化しておいた。<br><br>
                 この記録がポケモンを愛する者の手に渡って解読され、ポケモン研究のさらなる発展に繋がることを願う。
             </p>
-            <div class="mt-4 pt-3 border-t border-slate-800 text-center">
-                <p class="text-xs text-cyan-400 font-bold tracking-wide">
-                    リサーチレポートの閲覧にはパスワードが必要です
-                </p>
-                <p class="text-xs text-slate-400 mt-1">
-                    ランタンが残した「なぞのファイル」を開き、暗号を解読してパスワードを復元してください。
-                </p>
-            </div>
         </section>
 
-        <!-- Progress Overview -->
-        <section class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl relative overflow-hidden">
-            <div class="flex justify-between items-end mb-2">
-                <div>
-                    <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block">解読進行状況</span>
-                    <span id="completeBanner" class="hidden text-xs font-black text-amber-400 tracking-widest text-glow-gold">
-                        <i class="fa-solid fa-crown mr-1"></i> COMPLETE
-                    </span>
-                </div>
-                <div class="text-right">
-                    <span class="text-xs text-slate-400 mr-1">解読率</span>
-                    <span id="progressPercent" class="font-orbitron font-extrabold text-2xl text-cyan-400 text-glow">0</span><span class="font-orbitron text-cyan-400 font-bold">%</span>
-                </div>
-            </div>
-            
-            <!-- Progress Bar -->
-            <div class="w-full bg-slate-950 h-3.5 rounded-full overflow-hidden border border-slate-800 p-0.5">
-                <div id="progressBar" class="h-full bg-gradient-to-r from-cyan-500 to-amber-400 rounded-full transition-all duration-700 ease-out w-0 shadow-[0_0_12px_rgba(0,229,255,0.6)]"></div>
-            </div>
-
-            <!-- Complete Message Area -->
-            <div id="finalMessage" class="hidden mt-5 p-4 rounded-xl bg-amber-500/10 border border-amber-500/40 text-center space-y-2">
-                <h2 class="text-base font-bold text-amber-300 text-glow-gold flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-envelope-open-text"></i> ランタンからの手紙
-                </h2>
-                <p class="text-xs text-slate-200 leading-relaxed">
-                    伝説のポケモンに関する8つのリサーチレポートがすべて解読されました！<br>
-                    見事に全ての暗号を解き明かした君こそ、真のポケモンリサーチャーだ！
-                </p>
-            </div>
+        <!-- パスワード要求 / タイトル部分 -->
+        <section>
+            <h2 class="title-sub"><ruby>閲<rt>えつ</rt></ruby><ruby>覧<rt>らん</rt></ruby>には<ruby>パスワードが<ruby>必<rt>ひつ</rt></ruby><ruby>要<rt>よう</rt></ruby>です</h2>
+            <p class="desc">
+                ランタンが<ruby>残<rt>のこ</rt></ruby>した「なぞのファイル」を<ruby>開<rt>ひら</rt></ruby>き、<ruby>暗号<rt>あんごう</rt></ruby>を<ruby>解読<rt>かいどく</rt></ruby>してパスワードを<ruby>復元<rt>ふくげん</rt></ruby>してください。
+            </p>
         </section>
 
-        <!-- Riddles List (Q1 - Q8) -->
-        <section class="space-y-4" id="riddlesContainer">
-            <!-- Dynamically Rendered via JS -->
-        </section>
+        <!-- 解読率・進捗エリア -->
+        <div class="progress-box">
+            <div class="reset-wrap">
+                <button class="btn-reset" onclick="resetProgress()">進捗をリセット</button>
+            </div>
+            <div style="font-size: 11px; color: #94a3b8; font-weight: 700;"><ruby>解<rt>かい</rt></ruby><ruby>読<rt>どく</rt></ruby><ruby>率<rt>りつ</rt></ruby></div>
+            <div><span id="progressPercent" class="progress-rate">0</span><span style="font-size: 18px; font-weight: 700; color: #fbbf24;">%</span></div>
+            <div class="progress-bar-bg">
+                <div id="progressBar" class="progress-bar-fill"></div>
+            </div>
+            <p id="completeText" style="font-size: 11px; color: #fbbf24; display: none; font-weight: 700; margin-top: 6px;">
+                8つのリサーチレポートが全て解読されました！ランタンからの手紙を確認してください。
+            </p>
+        </div>
 
-    </main>
+        <!-- 8つの謎 (Q1〜Q8) -->
+        <div id="riddlesContainer"></div>
 
-    <footer class="mt-12 text-center text-[10px] text-slate-500 space-y-1">
-        <p>©2026 Pokémon. ©1995-2026 Nintendo/Creatures Inc./GAME FREAK inc.</p>
-        <p>ポケットモンスター・ポケモン・Pokémonは任天堂・クリーチャーズ・ゲームフリークの商標です。</p>
-    </footer>
+        <footer>
+            ©2026 Pokémon.<br>©1995-2026 Nintendo/Creatures Inc./GAME FREAK inc.<br>
+            ポケットモンスター・ポケモン・Pokémonは任天堂・クリーチャーズ・ゲームフリークの商標です。
+        </footer>
+    </div>
 
     <script>
-        // 8つのリサーチレポート（実際のサイト構成）
+        // 公式サイト通りのQ1〜Q8データ（答えは自由に変更できます）
         const RIDDLES = [
-            { id: 1, name: "Q1", ball: "monster", defaultPass: "ピカチュウ", title: "リサーチレポート #01", content: "【伝説のポケモンの影】特定の場所で目撃された影のデータ。このポケモンは雷とともに現れるという。" },
-            { id: 2, name: "Q2", ball: "super", defaultPass: "フリーザー", title: "リサーチレポート #02", content: "【氷雪の伝承】極寒の地に眠る翼の記録。冷気を自在に操り、雪山を訪れる者を導く。" },
-            { id: 3, name: "Q3", ball: "super", defaultPass: "サンダー", title: "リサーチレポート #03", content: "【雷雲の観測記】激しい雷雨とともに現れる黄金の羽を持つポケモン。巨大な落雷を発生させる。" },
-            { id: 4, name: "Q4", ball: "hyper", defaultPass: "ファイヤー", title: "リサーチレポート #04", content: "【火の鳥の生態】不吉な夜を照らす真紅の炎。その羽ばたきは山々を燃やすほど美しい。" },
-            { id: 5, name: "Q5", ball: "hyper", defaultPass: "ミュウツー", title: "リサーチレポート #05", content: "【遺伝子研究の遺伝子】人の手によって生み出された最強のポケモンに関する極秘ファイル。" },
-            { id: 6, name: "Q6", ball: "monster", defaultPass: "ルギア", title: "リサーチレポート #06", content: "【深海の神】海の神と称されるポケモンの潜伏場所。羽ばたくだけで40日嵐が続くと噂される。" },
-            { id: 7, name: "Q7", ball: "super", defaultPass: "ホウオウ", title: "リサーチレポート #07", content: "【虹色の翼】七色の虹を背負って飛ぶ伝説の鳥。見た者に永遠の幸せを約束する。" },
-            { id: 8, name: "Q8", ball: "monster", defaultPass: "レックウザ", title: "リサーチレポート #08", content: "【天空の守護者】オゾン層を飛び続け、地上からは決して見ることができない伝説の龍。" }
+            { id: 1, name: "Q1", answer: "ピカチュウ", text: "【リサーチレポート #01】特定の場所で目撃された影のデータ。雷とともに現れるという。" },
+            { id: 2, name: "Q2", answer: "フリーザー", text: "【リサーチレポート #02】極寒の地に眠る翼の記録。冷気を自在に操り、雪山を訪れる者を導く。" },
+            { id: 3, name: "Q3", answer: "サンダー", text: "【リサーチレポート #03】激しい雷雨とともに現れる黄金の羽を持つポケモン。巨大な落雷を発生させる。" },
+            { id: 4, name: "Q4", answer: "ファイヤー", text: "【リサーチレポート #04】不吉な夜を照らす真紅の炎。その羽ばたきは山々を燃やすほど美しい。" },
+            { id: 5, name: "Q5", answer: "ミュウツー", text: "【リサーチレポート #05】人の手によって生み出された最強のポケモンに関する極秘ファイル。" },
+            { id: 6, name: "Q6", answer: "ルギア", text: "【リサーチレポート #06】海の神と称されるポケモンの潜伏場所。羽ばたくだけで40日嵐が続くと噂される。" },
+            { id: 7, name: "Q7", answer: "ホウオウ", text: "【リサーチレポート #07】七色の虹を背負って飛ぶ伝説の鳥。見た者に永遠の幸せを約束する。" },
+            { id: 8, name: "Q8", answer: "レックウザ", text: "【リサーチレポート #08】オゾン層を飛び続け、地上からは決して見ることができない伝説の龍。" }
         ];
 
-        // Web Audio Synthesizer Sound Effects
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        
-        function playSound(type) {
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-
-            const now = audioCtx.currentTime;
-
-            if (type === 'scan') {
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(400, now);
-                osc.frequency.exponentialRampToValueAtTime(800, now + 0.15);
-                gain.gain.setValueAtTime(0.05, now);
-                gain.gain.linearRampToValueAtTime(0.01, now + 0.15);
-                osc.start(now);
-                osc.stop(now + 0.15);
-            } else if (type === 'success') {
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(523.25, now); // C5
-                osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
-                osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
-                osc.frequency.setValueAtTime(1046.50, now + 0.3); // C6
-                gain.gain.setValueAtTime(0.1, now);
-                gain.gain.linearRampToValueAtTime(0.01, now + 0.5);
-                osc.start(now);
-                osc.stop(now + 0.5);
-            } else if (type === 'error') {
-                osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(180, now);
-                osc.frequency.setValueAtTime(130, now + 0.15);
-                gain.gain.setValueAtTime(0.1, now);
-                gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
-                osc.start(now);
-                osc.stop(now + 0.3);
-            }
-        }
-
-        // State Management
-        function getSolvedList() {
-            try {
-                return JSON.parse(localStorage.getItem('legend_solved_riddles')) || [];
-            } catch {
-                return [];
-            }
+        function getSolved() {
+            try { return JSON.parse(localStorage.getItem('official_nazotoki_solved')) || []; }
+            catch { return []; }
         }
 
         function saveSolved(id) {
-            const list = getSolvedList();
-            if (!list.includes(id)) {
-                list.push(id);
-                localStorage.setItem('legend_solved_riddles', JSON.stringify(list));
+            let solved = getSolved();
+            if (!solved.includes(id)) {
+                solved.push(id);
+                localStorage.setItem('official_nazotoki_solved', JSON.stringify(solved));
             }
         }
 
-        function renderRiddles() {
+        function render() {
             const container = document.getElementById('riddlesContainer');
             container.innerHTML = '';
-            const solvedList = getSolvedList();
+            const solvedList = getSolved();
 
-            RIDDLES.forEach((r) => {
-                const isSolved = solvedList.includes(r.id);
-
+            RIDDLES.forEach(q => {
+                const isSolved = solvedList.includes(q.id);
                 const card = document.createElement('div');
-                card.id = `riddle-card-${r.id}`;
-                card.className = `rounded-2xl border transition-all duration-300 relative overflow-hidden ${
-                    isSolved 
-                    ? 'bg-slate-900/90 border-amber-500/50 shadow-[0_0_15px_rgba(251,191,36,0.15)]' 
-                    : 'bg-slate-900/70 border-slate-800'
-                }`;
+                card.className = 'q-card';
 
                 card.innerHTML = `
-                    <div class="p-5 space-y-4">
-                        <!-- Header Line -->
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2">
-                                <span class="font-orbitron font-black text-xl text-cyan-400">${r.name}</span>
-                                <span class="text-xs px-2.5 py-0.5 rounded-full font-bold ${
-                                    isSolved ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-slate-800 text-slate-400'
-                                }">
-                                    ${isSolved ? '<i class="fa-solid fa-check mr-1"></i>解読完了' : '未解読'}
-                                </span>
-                            </div>
-                            <span class="text-xs text-slate-500 font-mono">FILE_0${r.id}</span>
-                        </div>
-
-                        <!-- Unlocked Content View -->
-                        ${isSolved ? `
-                            <div class="space-y-2 pt-2 border-t border-slate-800/80 animate-fadeIn">
-                                <h3 class="text-sm font-bold text-amber-400 flex items-center gap-2">
-                                    <i class="fa-solid fa-folder-open"></i> ${r.title}
-                                </h3>
-                                <p class="text-xs text-slate-300 leading-relaxed bg-slate-950/60 p-3 rounded-lg border border-slate-800">
-                                    ${r.content}
-                                </p>
-                            </div>
-                        ` : `
-                            <!-- Locked Input View -->
-                            <div class="space-y-3">
-                                <div class="relative">
-                                    <input type="text" id="input-${r.id}" placeholder="パスワードを入力" 
-                                        class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 font-medium">
-                                </div>
-
-                                <div id="status-${r.id}" class="hidden text-xs text-center py-1 font-bold"></div>
-
-                                <button onclick="verifyPassword(${r.id})" id="btn-${r.id}" 
-                                    class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black text-sm tracking-wider shadow-lg transition-all active:scale-[0.99] flex items-center justify-center gap-2">
-                                    <span>解読（認証）実行</span>
-                                    <i class="fa-solid fa-key text-xs"></i>
-                                </button>
-                            </div>
-                        `}
+                    <div class="q-header">
+                        <span class="q-title">${q.name}</span>
+                        <span class="status-badge ${isSolved ? 'solved' : ''}">
+                            ${isSolved ? '<ruby>認証完了<rt>にんしょうかんりょう</rt></ruby>' : '未解読'}
+                        </span>
                     </div>
+                    ${isSolved ? `
+                        <div class="solved-content">
+                            <strong>【解読成功データ】</strong><br>
+                            ${q.text}
+                        </div>
+                    ` : `
+                        <div>
+                            <input type="text" id="input-${q.id}" placeholder="パスワードを入力">
+                            <button class="btn-submit" onclick="checkAnswer(${q.id})">認証する</button>
+                            <div id="status-${q.id}" class="msg-status" style="display:none;"></div>
+                        </div>
+                    `}
                 `;
-
                 container.appendChild(card);
             });
 
-            updateProgress();
+            const percent = Math.round((solvedList.length / RIDDLES.length) * 100);
+            document.getElementById('progressPercent').innerText = percent;
+            document.getElementById('progressBar').style.width = percent + '%';
+            document.getElementById('completeText').style.display = percent === 100 ? 'block' : 'none';
         }
 
-        function verifyPassword(id) {
+        function checkAnswer(id) {
             const input = document.getElementById(`input-${id}`);
-            const btn = document.getElementById(`btn-${id}`);
             const status = document.getElementById(`status-${id}`);
-            const card = document.getElementById(`riddle-card-${id}`);
+            const q = RIDDLES.find(item => item.id === id);
+            
+            if (!input.value.trim()) return;
 
-            if (!input || !input.value.trim()) return;
-
-            const riddle = RIDDLES.find(r => r.id === id);
-            const userVal = input.value.trim().toLowerCase();
-            const correctVal = riddle.defaultPass.toLowerCase();
-
-            // Disable during verification
-            input.disabled = true;
-            btn.disabled = true;
-            btn.classList.add('opacity-50');
-
-            // Sound & Scan UI
-            playSound('scan');
-            status.classList.remove('hidden', 'text-rose-400', 'text-emerald-400');
-            status.classList.add('text-cyan-400', 'animate-pulse');
-            status.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> 認証中・・・';
+            status.style.display = 'block';
+            status.style.color = '#38bdf8';
+            status.innerHTML = '<ruby>認証中<rt>にんしょうちゅう</rt></ruby>・・・';
 
             setTimeout(() => {
-                if (userVal === correctVal) {
-                    // Correct Answer
-                    playSound('success');
-                    status.classList.remove('text-cyan-400', 'animate-pulse');
-                    status.classList.add('text-emerald-400');
-                    status.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> 認証完了！';
-
-                    // Trigger Confetti
-                    confetti({
-                        particleCount: 50,
-                        spread: 60,
-                        origin: { y: 0.7 }
-                    });
-
+                if (input.value.trim().toLowerCase() === q.answer.toLowerCase()) {
+                    status.style.color = '#34d399';
+                    status.innerHTML = '<ruby>認証完了<rt>にんしょうかんりょう</rt></ruby>！';
+                    confetti({ particleCount: 40, spread: 60, origin: { y: 0.7 } });
                     saveSolved(id);
-                    setTimeout(() => renderRiddles(), 800);
-
+                    setTimeout(render, 800);
                 } else {
-                    // Wrong Password
-                    playSound('error');
-                    status.classList.remove('text-cyan-400', 'animate-pulse');
-                    status.classList.add('text-rose-400');
-                    status.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1"></i> パスワードが違います';
-
-                    card.classList.add('shake', 'border-rose-500/50');
-                    setTimeout(() => card.classList.remove('shake', 'border-rose-500/50'), 500);
-
-                    input.disabled = false;
-                    btn.disabled = false;
-                    btn.classList.remove('opacity-50');
-                    input.focus();
+                    status.style.color = '#f87171';
+                    status.innerHTML = 'パスワードが<ruby>違<rt>ちが</rt></ruby>います';
                 }
-            }, 1000);
+            }, 800);
         }
 
-        function updateProgress() {
-            const solved = getSolvedList();
-            const total = RIDDLES.length;
-            const percent = Math.round((solved.length / total) * 100);
-
-            document.getElementById('progressPercent').innerText = percent;
-            document.getElementById('progressBar').style.width = `${percent}%`;
-
-            const completeBanner = document.getElementById('completeBanner');
-            const finalMessage = document.getElementById('finalMessage');
-
-            if (percent === 100) {
-                completeBanner.classList.remove('hidden');
-                finalMessage.classList.remove('hidden');
-            } else {
-                completeBanner.classList.add('hidden');
-                finalMessage.classList.add('hidden');
+        function resetProgress() {
+            if (confirm("解読状況をリセットしますか？")) {
+                localStorage.removeItem('official_nazotoki_solved');
+                render();
             }
         }
 
-        function confirmReset() {
-            if (confirm("全ての解読状況をリセットしますか？")) {
-                localStorage.removeItem('legend_solved_riddles');
-                renderRiddles();
-            }
-        }
-
-        // Initial Load
-        document.addEventListener('DOMContentLoaded', () => {
-            renderRiddles();
-        });
+        document.addEventListener('DOMContentLoaded', render);
     </script>
 </body>
 </html>
